@@ -5,3 +5,5 @@ server/database/*
 !server/database/schema.sql
 
 jsonData.json
+
+SPEC.md

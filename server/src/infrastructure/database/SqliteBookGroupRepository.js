@@ -24,6 +24,14 @@ class SqliteBookGroupRepository extends BookGroupRepository {
     return bookGroup;
   }
 
+  async updateBooksCount(id, count) {
+
+    const stmt = this.db.prepare(`
+      UPDATE book_groups SET books_count = ? WHERE id = ?
+    `);
+    stmt.run(count, id);
+  }
+  
   async findById(id) {
     const stmt = this.db.prepare(`
       SELECT id, name, created_at, updated_at
@@ -69,10 +77,8 @@ class SqliteBookGroupRepository extends BookGroupRepository {
         bg.name, 
         bg.created_at, 
         bg.updated_at,
-        COUNT(b.id) as book_count
+        bg.books_count
       FROM book_groups bg
-      LEFT JOIN books b ON bg.id = b.group_id
-      GROUP BY bg.id
       ORDER BY bg.created_at DESC
       LIMIT ? OFFSET ?
     `);
@@ -84,7 +90,8 @@ class SqliteBookGroupRepository extends BookGroupRepository {
         row.id,
         row.name,
         new Date(row.created_at),
-        new Date(row.updated_at)
+        new Date(row.updated_at),
+        row.books_count
       );
       return group;
     });

@@ -1,21 +1,21 @@
 const StringCleaner = require('../utils/StringCleaner');
 
 class BookGroup {
-  constructor(id, name, createdAt = new Date(), updatedAt = new Date()) {
+  constructor(id, name, createdAt = new Date(), updatedAt = new Date(), booksCount = 0) {
     this.id = id;
     this.name = StringCleaner.clean(name);
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
-    this.books = [];
+    this.booksCount = booksCount;
   }
 
-  addBook(book) {
-    this.books.push(book);
+  updateBooksCount(count) {
+    this.booksCount = count;
     this.updatedAt = new Date();
   }
 
   getBookCount() {
-    return this.books.length;
+    return this.booksCount;
   }
 
   toJSON() {

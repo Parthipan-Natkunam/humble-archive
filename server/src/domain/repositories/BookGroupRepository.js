@@ -3,6 +3,10 @@ class BookGroupRepository {
     throw new Error('Method not implemented');
   }
 
+  async updateBooksCount(id, count) {
+    throw new Error('Method not implemented');
+  }
+
   async findById(id) {
     throw new Error('Method not implemented');
   }

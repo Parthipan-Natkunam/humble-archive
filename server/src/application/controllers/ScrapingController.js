@@ -49,8 +49,8 @@ class ScrapingController {
         }
       }
 
-      // Update group with book count
-      savedGroup.books = scrapedBooks;
+      savedGroup.updateBooksCount(booksSaved);
+      await this.bookGroupRepository.updateBooksCount(savedGroup.id, booksSaved);
 
       const response = {
         success: true,

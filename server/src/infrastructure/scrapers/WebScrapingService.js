@@ -26,7 +26,7 @@ class WebScrapingService extends ScrapingService {
     }
   }
 
-  async extractBookData(html, baseUrl) {
+  async extractBookData(html, url) {
     const $ = cheerio.load(html);
     const books = [];
 
@@ -43,7 +43,7 @@ class WebScrapingService extends ScrapingService {
       console.log('Successfully parsed JSON data from script tag');
       
       // Extract books from the JSON data
-      const extractedBooks = this.extractBooksFromJson(jsonData, baseUrl);
+      const extractedBooks = this.extractBooksFromJson(jsonData, url);
       books.push(...extractedBooks);
       
       console.log(`Total books extracted from JSON: ${books.length}`);
@@ -56,7 +56,7 @@ class WebScrapingService extends ScrapingService {
     return books;
   }
 
-  extractBooksFromJson(jsonData, baseUrl) {
+  extractBooksFromJson(jsonData, url) {
     const books = [];
 
     try {
@@ -68,7 +68,7 @@ class WebScrapingService extends ScrapingService {
             title: book.human_name,
             edition: book.callout,
             imageUrl: book.resolved_paths?.preview_image,
-            sourceUrl: baseUrl,
+            sourceUrl: book.publishers?.[0]?.['publisher-url'] || url,
           });
         }
       });

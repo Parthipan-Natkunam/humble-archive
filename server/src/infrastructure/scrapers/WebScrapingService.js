@@ -20,13 +20,13 @@ class WebScrapingService extends ScrapingService {
       });
       
       const html = response.data;
-      return this.extractBookData(html);
+      return this.extractBookData(html, url);
     } catch (error) {
       throw new Error(`Failed to scrape URL: ${error.message}`);
     }
   }
 
-  async extractBookData(html) {
+  async extractBookData(html, url) {
     const $ = cheerio.load(html);
     const books = [];
 
@@ -43,7 +43,7 @@ class WebScrapingService extends ScrapingService {
       console.log('Successfully parsed JSON data from script tag');
       
       // Extract books from the JSON data
-      const extractedBooks = this.extractBooksFromJson(jsonData);
+      const extractedBooks = this.extractBooksFromJson(jsonData, url);
       books.push(...extractedBooks);
       
       console.log(`Total books extracted from JSON: ${books.length}`);
@@ -56,7 +56,7 @@ class WebScrapingService extends ScrapingService {
     return books;
   }
 
-  extractBooksFromJson(jsonData) {
+  extractBooksFromJson(jsonData, url) {
     const books = [];
 
     try {
@@ -68,7 +68,7 @@ class WebScrapingService extends ScrapingService {
             title: book.human_name,
             edition: book.callout,
             imageUrl: book.resolved_paths?.preview_image,
-            sourceUrl: book.publishers?.[0]?.['publisher-url'],
+            sourceUrl: book.publishers?.[0]?.['publisher-url'] || url,
           });
         }
       });

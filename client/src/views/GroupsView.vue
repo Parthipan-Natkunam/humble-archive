@@ -181,10 +181,27 @@ const loadGroups = async () => {
   isLoading.value = true
   
   try {
-    const response = await apiService.getGroups(1, 100) // Load all groups
-    if (response.success) {
-      groups.value = response.data.groups
+    // Load groups with proper pagination to get all groups
+    let allGroups = []
+    let page = 1
+    const limit = 50 // Maximum allowed by the API
+    
+    while (true) {
+      const response = await apiService.getGroups(page, limit)
+      if (response.success) {
+        allGroups = allGroups.concat(response.data.groups)
+        
+        // Check if we've loaded all groups
+        if (response.data.groups.length < limit || page * limit >= response.data.pagination.totalItems) {
+          break
+        }
+        page++
+      } else {
+        break
+      }
     }
+    
+    groups.value = allGroups
   } catch (error) {
     notificationStore.error('Failed to load groups')
   } finally {

@@ -35,7 +35,23 @@ class DatabaseConnection {
     const schemaPath = path.join(__dirname, '../../../database/schema.sql');
     const schema = fs.readFileSync(schemaPath, 'utf8');
     
-    this.db.exec(schema);
+    // Split the schema into individual statements
+    const statements = schema
+      .split(';')
+      .map(stmt => stmt.trim())
+      .filter(stmt => stmt.length > 0);
+    
+    // Execute each statement with error handling
+    for (const statement of statements) {
+      try {
+        this.db.exec(statement);
+      } catch (error) {
+        // Ignore "table already exists" errors
+        if (!error.message.includes('already exists')) {
+          console.warn('Database initialization warning:', error.message);
+        }
+      }
+    }
   }
 }
 

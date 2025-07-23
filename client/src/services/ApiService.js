@@ -11,9 +11,11 @@ const api = axios.create({
 // Request interceptor
 api.interceptors.request.use(
   (config) => {
+    console.log(`API Request: ${config.method?.toUpperCase()} ${config.url}`)
     return config
   },
   (error) => {
+    console.error('API Request Error:', error)
     return Promise.reject(error)
   }
 )
@@ -21,9 +23,11 @@ api.interceptors.request.use(
 // Response interceptor
 api.interceptors.response.use(
   (response) => {
+    console.log(`API Response: ${response.config.method?.toUpperCase()} ${response.config.url} - ${response.status}`)
     return response.data
   },
   (error) => {
+    console.error('API Response Error:', error.response?.status, error.response?.data)
     const message = error.response?.data?.error || error.message || 'An error occurred'
     return Promise.reject(new Error(message))
   }

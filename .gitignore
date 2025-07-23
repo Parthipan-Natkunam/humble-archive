@@ -3,3 +3,5 @@ node_modules
 
 server/database/*
 !server/database/schema.sql
+
+jsonData.json

@@ -207,11 +207,30 @@ const loadGroupDetails = async () => {
   error.value = null
   
   try {
-    const response = await apiService.getGroupBooks(groupId, 1, 1000) // Load all books
-    if (response.success) {
-      group.value = response.data.group
-      books.value = response.data.books
+    // Load books with proper pagination to get all books
+    let allBooks = []
+    let page = 1
+    const limit = 100 // Maximum allowed by the API
+    
+    while (true) {
+      const response = await apiService.getGroupBooks(groupId, page, limit)
+      if (response.success) {
+        if (page === 1) {
+          group.value = response.data.group
+        }
+        allBooks = allBooks.concat(response.data.books)
+        
+        // Check if we've loaded all books
+        if (response.data.books.length < limit || page * limit >= response.data.pagination.totalItems) {
+          break
+        }
+        page++
+      } else {
+        break
+      }
     }
+    
+    books.value = allBooks
   } catch (err) {
     error.value = err.message || 'Failed to load group details'
     notificationStore.error('Failed to load group details')

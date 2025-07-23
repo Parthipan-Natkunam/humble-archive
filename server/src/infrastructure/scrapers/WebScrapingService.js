@@ -1,46 +1,23 @@
 const ScrapingService = require('../../domain/services/ScrapingService');
-const puppeteer = require('puppeteer');
+const axios = require('axios');
 const cheerio = require('cheerio');
 
 class WebScrapingService extends ScrapingService {
   constructor() {
     super();
-    this.browser = null;
-  }
-
-  async initBrowser() {
-    if (!this.browser) {
-      this.browser = await puppeteer.launch({
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
-      });
-    }
-    return this.browser;
-  }
-
-  async closeBrowser() {
-    if (this.browser) {
-      await this.browser.close();
-      this.browser = null;
-    }
   }
 
   async scrapeBooks(url) {
     try {
-      const browser = await this.initBrowser();
-      const page = await browser.newPage();
+      // Fetch HTML content using axios
+      const response = await axios.get(url, {
+        timeout: 30000,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+      });
       
-      // Set user agent to avoid being blocked
-      await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
-      
-      // Set timeout
-      await page.setDefaultTimeout(30000);
-      
-      await page.goto(url, { waitUntil: 'networkidle2' });
-      
-      const html = await page.content();
-      await page.close();
-      
+      const html = response.data;
       return this.extractBookData(html, url);
     } catch (error) {
       throw new Error(`Failed to scrape URL: ${error.message}`);

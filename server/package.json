@@ -12,8 +12,8 @@
   "dependencies": {
     "express": "^4.18.2",
     "better-sqlite3": "^9.2.2",
-    "puppeteer": "^21.5.2",
     "cheerio": "^1.0.0-rc.12",
+    "axios": "^1.6.2",
     "joi": "^17.11.0",
     "cors": "^2.8.5",
     "helmet": "^7.1.0",
@@ -29,7 +29,7 @@
     "api",
     "express",
     "sqlite",
-    "puppeteer"
+    "cheerio"
   ],
   "author": "",
   "license": "MIT"

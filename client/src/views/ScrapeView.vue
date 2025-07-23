@@ -2,9 +2,9 @@
   <div class="space-y-8">
     <!-- Header -->
     <div class="text-center space-y-4">
-      <h1 class="text-4xl font-bold text-gradient">Book Scraper</h1>
+      <h1 class="text-4xl font-bold text-gradient">Humble Keeper</h1>
       <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-        Extract book information from any website. Simply provide a URL and we'll scrape titles, editions, and images for you.
+        Archive ebooks bundle list from Humble Bundle.
       </p>
     </div>
 
@@ -30,7 +30,7 @@
               />
             </div>
             <p class="mt-1 text-sm text-gray-500">
-              Enter the URL of a website containing book information
+              Enter the URL of a Humble Books Bundle page.
             </p>
           </div>
 

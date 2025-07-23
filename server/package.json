@@ -1,5 +1,5 @@
 {
-  "name": "book-scraper-server",
+  "name": "humble-keeper-server",
   "version": "1.0.0",
   "description": "Backend API server for book scraping application",
   "main": "src/main.js",

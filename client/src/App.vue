@@ -9,7 +9,7 @@
             <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg flex items-center justify-center">
               <BookOpenIcon class="w-5 h-5 text-white" />
             </div>
-            <span class="text-xl font-bold text-gradient">Book Scraper</span>
+            <span class="text-xl font-bold text-gradient">Humble Keeper</span>
           </router-link>
 
           <!-- Navigation Links -->

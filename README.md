@@ -1,15 +1,18 @@
-# Book Scraper Application
+# Humble Archive
 
-A full-stack web application that scrapes book information from URLs, extracts book titles, edition numbers, and image URLs, then stores the data in a SQLite database. Built with Domain-Driven Design principles.
+<p align="center">
+  <img src="./docs/cover.png" alt="Humble Archive" />
+</p>
 
-## 🚀 Features
+> [!IMPORTANT]
+> Please be respectful of the rate limits of the website that you get your data from.
+> Do not scrape the website too frequently.
+> For personal & non-commercial use only.
+> Please comply with the terms of service of the website that you get your data from.
+> This is a personal project and is not affiliated with Humble Bundle in any way.
 
-- **Web Scraping**: Scrape book titles, editions, and images from any URL
-- **Group Management**: Organize scraped books into named groups
-- **RESTful API**: Clean API endpoints with proper error handling
-- **SQLite Database**: Lightweight, file-based database
-- **Security**: CORS, rate limiting, input validation
-- **Pagination**: Efficient pagination for large datasets
+A full-stack web application that scrapes book information from a Humble Books Bundle sale URL, extracts book titles, edition details, and image URLs, then stores the data in a SQLite database. Built with Domain-Driven Design principles.
+
 
 ## 🏗️ Architecture
 
@@ -34,7 +37,7 @@ hb_scrapper/
 │   │   │   └── middleware/ # Express middleware
 │   │   └── main.js         # Server entry point
 │   └── database/           # SQLite database files
-└── client/                 # Frontend Vue application (coming soon)
+└── client/                 # Frontend Vue application
 ```
 
 ## 📋 API Endpoints
@@ -123,7 +126,7 @@ npm start
 
 The server will start on `http://localhost:3001`
 
-### Frontend Setup (Coming Soon)
+### Frontend Setup
 
 The Vue.js frontend will be implemented in the `client/` directory with three main routes:
 
@@ -147,14 +150,8 @@ curl http://localhost:3001/health
 curl http://localhost:3001/
 ```
 
-3. **Test Scraping:**
 
-```bash
-# Run the test script
-node test-scraping.js
-```
-
-4. **Manual API Testing:**
+3. **Manual API Testing:**
 
 ```bash
 # Scrape books
@@ -208,32 +205,6 @@ CREATE TABLE books (
 | `CLIENT_URL`    | Frontend URL for CORS | http://localhost:3000 |
 | `DATABASE_PATH` | SQLite database path  | ./database/books.db   |
 
-## 🛡️ Security Features
-
-- **CORS**: Configured for frontend communication
-- **Rate Limiting**: 100 requests per 15 minutes per IP
-- **Input Validation**: Joi schema validation
-- **SQL Injection Prevention**: Parameterized queries
-- **Helmet**: Security headers
-
-## 🔍 Scraping Strategy
-
-The application uses a flexible scraping approach:
-
-1. **URL Validation**: Validates input URL format
-2. **HTML Fetching**: Uses axios with custom headers
-3. **Content Parsing**: Extracts book information using common selectors
-4. **Image Handling**: Validates and stores image URLs
-5. **Error Handling**: Graceful failure with detailed error messages
-
-### Supported Selectors
-
-The scraper looks for common book-related selectors:
-
-- `.book-item`, `.product-item`, `.book`
-- `h1`, `h2`, `h3`, `h4` for titles
-- `img[src]` for images
-- `.edition`, `.version` for edition information
 
 ## 📊 Error Handling
 
@@ -272,19 +243,3 @@ All errors follow a consistent format:
 3. Implement infrastructure layer
 4. Add application layer controllers
 5. Create API endpoints
-
-## 📝 License
-
-MIT License - see LICENSE file for details
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
-
-## 📞 Support
-
-For questions or issues, please open an issue on GitHub.

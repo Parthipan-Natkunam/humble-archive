@@ -1,13 +1,13 @@
 const BaseValueObject = require('./BaseValueObject');
 
-class BookTitle extends BaseValueObject {
+class GroupName extends BaseValueObject {
   constructor(value) {
     if (!BaseValueObject.isValidString(value)) {
-      throw new Error('Invalid book title');
+      throw new Error('Invalid group name');
     }
 
     super(value);
   }
 }
 
-module.exports = BookTitle; 
+module.exports = GroupName;

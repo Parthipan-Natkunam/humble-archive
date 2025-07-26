@@ -1,9 +1,8 @@
-const StringCleaner = require('../utils/StringCleaner');
-
+const GroupName = require('../value-objects/GroupName');
 class BookGroup {
   constructor(id, name, createdAt = new Date(), updatedAt = new Date(), booksCount = 0) {
     this.id = id;
-    this.name = StringCleaner.clean(name);
+    this.name = new GroupName(name);
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
     this.booksCount = booksCount;
@@ -21,7 +20,7 @@ class BookGroup {
   toJSON() {
     return {
       id: this.id,
-      name: this.name,
+      name: this.name.getValue(),
       bookCount: this.getBookCount(),
       createdAt: this.createdAt,
       updatedAt: this.updatedAt

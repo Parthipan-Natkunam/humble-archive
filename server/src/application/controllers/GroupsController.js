@@ -67,7 +67,7 @@ class GroupsController {
         data: {
           group: {
             id: group.id,
-            name: group.name,
+            name: group.name.getValue(),
             createdAt: group.createdAt
           },
           books: books.map(book => book.toJSON()),

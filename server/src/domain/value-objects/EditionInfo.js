@@ -1,16 +1,14 @@
-class EditionInfo {
+const BaseValueObject = require('./BaseValueObject');
+
+class EditionInfo extends BaseValueObject {
   constructor(value) {
-    this.value = value ? value.trim() : null;
-  }
+    if (!!value && !BaseValueObject.isValidString(value)) { // the edition info is optional, so validate only if it's truthy
+      throw new Error('Invalid edition info');
+    }
 
-  toString() {
-    return this.value;
+    super(value);
   }
-
-  getValue() {
-    return this.value;
-  }
-
+  
   hasValue() {
     return this.value !== null && this.value !== undefined && this.value.length > 0;
   }

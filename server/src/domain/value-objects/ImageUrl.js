@@ -1,30 +1,16 @@
-class ImageUrl {
+const BaseValueObject = require('./BaseValueObject');
+
+class ImageUrl extends BaseValueObject {
   constructor(value) {
-    if (value && !this.isValid(value)) {
-      throw new Error('Invalid image URL format');
+    if (!!value && !BaseValueObject.isValidUrl(value)) { // the image url is optional, so validate only if it's truthy
+      throw new Error('Invalid image URL');
     }
-    this.value = value;
-  }
 
-  isValid(url) {
-    try {
-      const urlObj = new URL(url);
-      return urlObj.protocol === 'http:' || urlObj.protocol === 'https:';
-    } catch {
-      return false;
-    }
-  }
-
-  toString() {
-    return this.value;
-  }
-
-  getValue() {
-    return this.value;
+    super(value);
   }
 
   hasValue() {
-    return this.value !== null && this.value !== undefined;
+    return this.value !== null && this.value !== undefined && this.value.length > 0;
   }
 }
 

@@ -1,26 +1,12 @@
-class Url {
+const BaseValueObject = require('./BaseValueObject');
+
+class Url extends BaseValueObject {
   constructor(value) {
-    if (!this.isValid(value)) {
-      throw new Error('Invalid URL format');
+    if (!BaseValueObject.isValidUrl(value)) {
+      throw new Error('Invalid URL');
     }
-    this.value = value;
-  }
 
-  isValid(url) {
-    try {
-      new URL(url);
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
-  toString() {
-    return this.value;
-  }
-
-  getValue() {
-    return this.value;
+    super(value);
   }
 }
 

@@ -1,6 +1,7 @@
+const StringCleaner = require('../utils/StringCleaner');
 class EditionInfo {
   constructor(value) {
-    this.value = value ? value.trim() : null;
+    this.value = StringCleaner.clean(value)?.trim();
   }
 
   toString() {

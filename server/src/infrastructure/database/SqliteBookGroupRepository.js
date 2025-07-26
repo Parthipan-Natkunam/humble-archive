@@ -15,7 +15,7 @@ class SqliteBookGroupRepository extends BookGroupRepository {
     `);
 
     const result = stmt.run(
-      bookGroup.name,
+      bookGroup.name.getValue(),
       bookGroup.createdAt.toISOString(),
       bookGroup.updatedAt.toISOString()
     );

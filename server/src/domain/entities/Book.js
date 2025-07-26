@@ -2,15 +2,14 @@ const BookTitle = require('../value-objects/BookTitle');
 const ImageUrl = require('../value-objects/ImageUrl');
 const EditionInfo = require('../value-objects/EditionInfo');
 const Url = require('../value-objects/Url');
-const StringCleaner = require('../utils/StringCleaner');
 
 class Book {
   constructor(id, title, edition, imageUrl, sourceUrl, groupId, createdAt = new Date()) {
     this.id = id;
-    this.title = new BookTitle(StringCleaner.clean(title));
-    this.edition = new EditionInfo(StringCleaner.clean(edition));
-    this.imageUrl = new ImageUrl(imageUrl); // URLs don't need HTML cleaning
-    this.sourceUrl = new Url(sourceUrl); // URLs don't need HTML cleaning
+    this.title = new BookTitle(title);
+    this.edition = new EditionInfo(edition);
+    this.imageUrl = new ImageUrl(imageUrl); 
+    this.sourceUrl = new Url(sourceUrl);
     this.groupId = groupId;
     this.createdAt = createdAt;
   }

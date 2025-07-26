@@ -1,15 +1,12 @@
 const StringCleaner = require('../utils/StringCleaner');
 
-class BookTitle {
+class GroupName {
   constructor(value) {
-    if (!this.isValid(value)) {
-      throw new Error('Book title cannot be empty');
-    }
     this.value = StringCleaner.clean(value)?.trim();
   }
 
-  isValid(title) {
-    return typeof title === 'string' && title.trim().length > 0;
+  isValid(name) {
+    return typeof name === 'string' && name.trim().length > 0;
   }
 
   toString() {
@@ -21,4 +18,4 @@ class BookTitle {
   }
 }
 
-module.exports = BookTitle; 
+module.exports = GroupName;

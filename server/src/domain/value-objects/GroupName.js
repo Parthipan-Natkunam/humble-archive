@@ -1,20 +1,15 @@
-const StringCleaner = require('../utils/StringCleaner');
+const BaseValueObject = require('./BaseValueObject');
 
-class GroupName {
+class GroupName extends BaseValueObject {
   constructor(value) {
-    this.value = StringCleaner.clean(value)?.trim();
+    super(value);
+    if (!this.isValid(value)) {
+      throw new Error('Invalid group name');
+    }
   }
 
   isValid(name) {
     return typeof name === 'string' && name.trim().length > 0;
-  }
-
-  toString() {
-    return this.value;
-  }
-
-  getValue() {
-    return this.value;
   }
 }
 

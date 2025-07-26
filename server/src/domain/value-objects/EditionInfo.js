@@ -1,15 +1,12 @@
-const StringCleaner = require('../utils/StringCleaner');
-class EditionInfo {
+const BaseValueObject = require('./BaseValueObject');
+
+class EditionInfo extends BaseValueObject {
   constructor(value) {
-    this.value = StringCleaner.clean(value)?.trim();
+    super(value);
   }
 
-  toString() {
-    return this.value;
-  }
-
-  getValue() {
-    return this.value;
+  isValid(edition) {
+    return typeof edition === 'string' && edition.trim().length > 0;
   }
 
   hasValue() {

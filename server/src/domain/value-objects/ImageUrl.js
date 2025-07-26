@@ -1,9 +1,8 @@
-class ImageUrl {
+const BaseValueObject = require('./BaseValueObject');
+
+class ImageUrl extends BaseValueObject {
   constructor(value) {
-    if (value && !this.isValid(value)) {
-      throw new Error('Invalid image URL format');
-    }
-    this.value = value;
+    super(value);
   }
 
   isValid(url) {
@@ -15,16 +14,8 @@ class ImageUrl {
     }
   }
 
-  toString() {
-    return this.value;
-  }
-
-  getValue() {
-    return this.value;
-  }
-
   hasValue() {
-    return this.value !== null && this.value !== undefined;
+    return this.value !== null && this.value !== undefined && this.value.length > 0;
   }
 }
 

@@ -1,23 +1,15 @@
-const StringCleaner = require('../utils/StringCleaner');
+const BaseValueObject = require('./BaseValueObject');
 
-class BookTitle {
+class BookTitle extends BaseValueObject {
   constructor(value) {
+    super(value);
     if (!this.isValid(value)) {
-      throw new Error('Book title cannot be empty');
+      throw new Error('Invalid book title');
     }
-    this.value = StringCleaner.clean(value)?.trim();
   }
 
   isValid(title) {
     return typeof title === 'string' && title.trim().length > 0;
-  }
-
-  toString() {
-    return this.value;
-  }
-
-  getValue() {
-    return this.value;
   }
 }
 

@@ -2,14 +2,11 @@ const BaseValueObject = require('./BaseValueObject');
 
 class BookTitle extends BaseValueObject {
   constructor(value) {
-    super(value);
-    if (!this.isValid(value)) {
+    if (!BaseValueObject.isValidString(value)) {
       throw new Error('Invalid book title');
     }
-  }
 
-  isValid(title) {
-    return typeof title === 'string' && title.trim().length > 0;
+    super(value);
   }
 }
 

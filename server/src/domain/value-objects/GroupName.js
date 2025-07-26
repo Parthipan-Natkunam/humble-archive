@@ -2,14 +2,11 @@ const BaseValueObject = require('./BaseValueObject');
 
 class GroupName extends BaseValueObject {
   constructor(value) {
-    super(value);
-    if (!this.isValid(value)) {
+    if (!BaseValueObject.isValidString(value)) {
       throw new Error('Invalid group name');
     }
-  }
 
-  isValid(name) {
-    return typeof name === 'string' && name.trim().length > 0;
+    super(value);
   }
 }
 
